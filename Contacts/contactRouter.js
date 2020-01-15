@@ -3,10 +3,6 @@ const router = express.Router();
 
 const db = require("./contactModel");
 
-router.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
 
 //GET Request
 router.get("/", (req, res) => {
