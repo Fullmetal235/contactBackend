@@ -3,17 +3,16 @@ const contact = express.Router();
 
 const db = require("./contactModel");
 
-
 //GET Request
 contact.get("/", (req, res) => {
   db.find()
-    .then(users => {
+    .then((users) => {
       res.status(200).json(users);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         err: err,
-        message: "The users information could not be retrieved."
+        message: "The users information could not be retrieved.",
       });
     });
 });
@@ -22,19 +21,19 @@ contact.get("/", (req, res) => {
 contact.get("/:id", (req, res) => {
   const { id } = req.params;
   db.findById(id)
-    .then(user => {
+    .then((user) => {
       if (user) {
         res.json(user);
       } else {
         res.status(404).json({
-          message: "The user with the specified ID does not exist."
+          message: "The user with the specified ID does not exist.",
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         err: err,
-        message: "The user information could not be retrieved."
+        message: "The user information could not be retrieved.",
       });
     });
 });
@@ -43,19 +42,19 @@ contact.get("/:id", (req, res) => {
 contact.post("/", (req, res) => {
   const { fullName, email, message } = req.body;
   db.insert(req.body)
-    .then(user => {
+    .then((user) => {
       if (user) {
         res.status(201).json(user);
       } else {
         res.status(400).json({
-          message: "Please provide a name and email for the user."
+          message: "Please provide a name and email for the user.",
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         err: err,
-        message: "There was an error saving user to the database."
+        message: "There was an error saving user to the database.",
       });
     });
 });
@@ -66,24 +65,24 @@ contact.put("/:id", (req, res) => {
   const { fullName, email, message } = req.body;
   if (fullName && email && message) {
     db.update(id, req.body)
-      .then(updatedUser => {
+      .then((updatedUser) => {
         if (updatedUser) {
           res.status(200).json(updatedUser);
         } else {
           res.status(404).json({
-            message: "The user with the specified ID does not exist."
+            message: "The user with the specified ID does not exist.",
           });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(500).json({
           err: err,
-          message: "The user information could not be modified."
+          message: "The user information could not be modified.",
         });
       });
   } else {
     res.status(400).json({
-      message: "Please provide a name and bio for the user."
+      message: "Please provide a name and bio for the user.",
     });
   }
 });
@@ -92,21 +91,21 @@ contact.put("/:id", (req, res) => {
 contact.delete("/:id", (req, res) => {
   const { id } = req.params;
   db.remove(id)
-    .then(deletedCharacter => {
+    .then((deletedCharacter) => {
       if (deletedCharacter) {
         res.status(200).json(deletedCharacter);
       } else {
         res.status(404).json({
-          message: "The user with the specified ID does not exist."
+          message: "The user with the specified ID does not exist.",
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         err: err,
-        message: "The user could not be removed."
+        message: "The user could not be removed.",
       });
     });
 });
 
-module.exports = ;
+module.exports = contact;
