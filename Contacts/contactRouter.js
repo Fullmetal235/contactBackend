@@ -1,11 +1,11 @@
 const express = require("express");
-const router = express.Router();
+const contact = express.Router();
 
 const db = require("./contactModel");
 
 
 //GET Request
-router.get("/", (req, res) => {
+contact.get("/", (req, res) => {
   db.find()
     .then(users => {
       res.status(200).json(users);
@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 });
 
 //GET Request with certain user
-router.get("/:id", (req, res) => {
+contact.get("/:id", (req, res) => {
   const { id } = req.params;
   db.findById(id)
     .then(user => {
@@ -40,7 +40,7 @@ router.get("/:id", (req, res) => {
 });
 
 //POST Request
-router.post("/", (req, res) => {
+contact.post("/", (req, res) => {
   const { fullName, email, message } = req.body;
   db.insert(req.body)
     .then(user => {
@@ -61,7 +61,7 @@ router.post("/", (req, res) => {
 });
 
 //PUT Request
-router.put("/:id", (req, res) => {
+contact.put("/:id", (req, res) => {
   const { id } = req.params;
   const { fullName, email, message } = req.body;
   if (fullName && email && message) {
@@ -89,7 +89,7 @@ router.put("/:id", (req, res) => {
 });
 
 //DELETE Request
-router.delete("/:id", (req, res) => {
+contact.delete("/:id", (req, res) => {
   const { id } = req.params;
   db.remove(id)
     .then(deletedCharacter => {
@@ -109,4 +109,4 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = ;
